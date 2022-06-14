@@ -36,7 +36,7 @@ let keycloakStrategy = new KeycloakStrategy(
   }
 );
 
-authenticator.use(auth0Strategy);
+authenticator.use(keycloakStrategy);
 ```
 
 ### Setup your routes
