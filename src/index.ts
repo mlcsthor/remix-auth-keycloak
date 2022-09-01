@@ -6,6 +6,7 @@ import type {
 import { OAuth2Strategy } from "remix-auth-oauth2";
 
 export interface KeycloakStrategyOptions {
+  useSSL: boolean;
   domain: string;
   realm: string;
   clientID: string;
@@ -71,8 +72,8 @@ export class KeycloakStrategy<User> extends OAuth2Strategy<
     // using our strategy
     super(
       {
-        authorizationURL: `https://${options.domain}/auth/realms/${options.realm}/protocol/openid-connect/auth`,
-        tokenURL: `https://${options.domain}/auth/realms/${options.realm}/protocol/openid-connect/token`,
+        authorizationURL: `${options.useSSL?'https':'http'}://${options.domain}/realms/${options.realm}/protocol/openid-connect/auth`,
+        tokenURL: `${options.useSSL?'https':'http'}://${options.domain}/realms/${options.realm}/protocol/openid-connect/token`,
         clientID: options.clientID,
         clientSecret: options.clientSecret,
         callbackURL: options.callbackURL,
@@ -80,7 +81,7 @@ export class KeycloakStrategy<User> extends OAuth2Strategy<
       verify
     );
 
-    this.userInfoURL = `https://${options.domain}/auth/realms/${options.realm}/protocol/openid-connect/userinfo`;
+    this.userInfoURL = `${options.useSSL?'https':'http'}://${options.domain}/realms/${options.realm}/protocol/openid-connect/userinfo`;
     this.scope = options.scope || "openid profile email";
   }
 
