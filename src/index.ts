@@ -70,10 +70,12 @@ export class KeycloakStrategy<User> extends OAuth2Strategy<
     // And we pass the options to the super constructor using our own options
     // to generate them, this was we can ask less configuration to the developer
     // using our strategy
+    const host = `${options.useSSL ? "https" : "http"}://${options.domain}`;
+
     super(
       {
-        authorizationURL: `${options.useSSL?'https':'http'}://${options.domain}/realms/${options.realm}/protocol/openid-connect/auth`,
-        tokenURL: `${options.useSSL?'https':'http'}://${options.domain}/realms/${options.realm}/protocol/openid-connect/token`,
+        authorizationURL: `${host}/realms/${options.realm}/protocol/openid-connect/auth`,
+        tokenURL: `${host}/realms/${options.realm}/protocol/openid-connect/token`,
         clientID: options.clientID,
         clientSecret: options.clientSecret,
         callbackURL: options.callbackURL,
@@ -81,7 +83,7 @@ export class KeycloakStrategy<User> extends OAuth2Strategy<
       verify
     );
 
-    this.userInfoURL = `${options.useSSL?'https':'http'}://${options.domain}/realms/${options.realm}/protocol/openid-connect/userinfo`;
+    this.userInfoURL = `${host}/realms/${options.realm}/protocol/openid-connect/userinfo`;
     this.scope = options.scope || "openid profile email";
   }
 
