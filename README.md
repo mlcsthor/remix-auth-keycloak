@@ -24,6 +24,7 @@ export const authenticator = new Authenticator<User>(sessionStorage);
 
 let keycloakStrategy = new KeycloakStrategy(
   {
+    useSSL: true,
     domain: "example.app",
     realm: "example",
     clientID: "YOUR_CLIENT_ID",
