@@ -9,6 +9,7 @@ describe(KeycloakStrategy, () => {
   });
 
   let options = Object.freeze({
+    useSSL: true,
     domain: "example.app",
     realm: "example",
     clientID: "MY_CLIENT_ID",
@@ -93,7 +94,7 @@ describe(KeycloakStrategy, () => {
 
       expect(redirectUrl.hostname).toBe("example.app");
       expect(redirectUrl.pathname).toBe(
-        "/auth/realms/example/protocol/openid-connect/auth"
+        "/realms/example/protocol/openid-connect/auth"
       );
     }
   });
