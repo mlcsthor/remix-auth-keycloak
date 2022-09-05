@@ -1,6 +1,6 @@
 {
   "name": "remix-auth-keycloak",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": "github:mlcsthor/remix-auth-keycloak",
   "homepage": "https://github.com/mlcsthor/remix-auth-keycloak#readme",
   "author": {
